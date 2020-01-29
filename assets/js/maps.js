@@ -40,6 +40,55 @@
             zIndex: mark[3]
           });
     }
+    
+// ---- Taken from Codex turotials on multiple markers info windows ----
+
+    // Info window content
+    var infoWindowContent = [
+        ['<div class="info_content">' +
+        '<h3>Brooklyn Museum</h3>' +
+        '<p>The Brooklyn Museum is an art museum located in the New York City borough of Brooklyn.</p>' + '</div>'],
+        ['<div class="info_content">' +
+        '<h3>Brooklyn Public Library</h3>' +
+        '<p>The Brooklyn Public Library (BPL) is the public library system of the borough of Brooklyn, in New York City.</p>' +
+        '</div>'],
+        ['<div class="info_content">' +
+        '<h3>Prospect Park Zoo</h3>' +
+        '<p>The Prospect Park Zoo is a 12-acre (4.9 ha) zoo located off Flatbush Avenue on the eastern side of Prospect Park, Brooklyn, New York City.</p>' +
+        '</div>']
+    ];
+        
+    // Add multiple markers to map
+    var infoWindow = new google.maps.InfoWindow(), marks, i;
+    
+    // Place each marker on the map  
+    // for( i = 0; i < marks.length; i++ ) {
+    //     var position = new google.maps.LatLng(marks[i][1], marks[i][2]);
+    //     bounds.extend(position);
+    //     marker = new google.maps.Marker({
+    //         position: position,
+    //         map: map,
+    //         title: markers[i][0]
+    //     });
+        
+        // Add info window to marker    
+        google.maps.event.addListener(markers, 'click', (function(markers, i) {
+            return function() {
+                infoWindow.setContent(infoWindowContent[i][0]);
+                infoWindow.open(map, markers);
+            }
+        })(markers, i));
+
+        // Center the map to fit all markers on the screen
+        map.fitBounds(bounds);
+    
+
+    // Set zoom level
+    var boundsListener = google.maps.event.addListener((map), 'bounds_changed', function(event) {
+        this.setZoom(14);
+        google.maps.event.removeListener(boundsListener);
+    });
+   
 
       var markerCluster = new MarkerClusterer(map, markers,
             {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
