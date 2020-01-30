@@ -3,6 +3,7 @@
 function initMap() {
             var bounds = new google.maps.LatLngBounds();
             var map = new google.maps.Map(document.getElementById("map"), {
+                zoom: 8.5,
                 center: {
                     lat: 52.261062,
                     lng: -9.683187
@@ -133,7 +134,7 @@ function initMap() {
 
           bounds.extend(place.geometry.location);
         }
-        map.fitBounds(bounds);
+        // map.fitBounds(bounds);
     
        
         // Center the map to fit all markers on the screen
@@ -141,10 +142,10 @@ function initMap() {
     
 
     // Set zoom level
-    var boundsListener = google.maps.event.addListener((map), 'bounds_changed', function(event) {
-        this.setZoom(8.5);
-        google.maps.event.removeListener(boundsListener);
-    });
+    // var boundsListener = google.maps.event.addListener((map), 'bounds_changed', function(event) {
+    //     this.setZoom(8.5);
+    //     google.maps.event.removeListener(boundsListener);
+    // });
     
 }
 
