@@ -204,4 +204,56 @@ color: #ffffff;
     transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
 }
 
+/* -------------------------- Search Box for Map -------------------------- */
 
+ #right-panel {
+        font-family: 'Montserrat','sans-serif';
+        line-height: 30px;
+        padding-left: 10px;
+      }
+
+      #right-panel select, #right-panel input {
+        font-size: 15px;
+      }
+
+      #right-panel select {
+        width: 100%;
+      }
+
+      #right-panel i {
+        font-size: 12px;
+      }
+      #right-panel {
+        font-family: Montserrat, sans-serif;
+        position: absolute;
+        height: 90%;
+        width: 90%;
+        padding: 5px;
+        border: 1px solid #999;
+        background: #fff;
+      }
+     .search h2 {
+        font-size: 22px;
+        margin: 0 0 5px 0;
+      }
+      .search ul {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+        height: 271px;
+        overflow-y: scroll;
+      }
+      .search li {
+        background-color: #f1f1f1;
+        padding: 10px;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+      }
+      .search li:nth-child(odd) {
+        background-color: #fcfcfc;
+      }
+      #more {
+        width: 100%;
+        margin: 5px 0 0 0;
+      }
