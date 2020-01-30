@@ -38,7 +38,7 @@ function initMap() {
         ['<div class="info_content">' +
         '<h3>Fenit Pier</h3>' +
         '<p>Pier and Rock fishing.</p>' +
-        '<p>The pier is easily accessible, one can simply drive down and park on the pier, but be careful on the rocks</p>' +
+        '<p>The pier is easily accessible, one can simply drive down and park on the pier, but be careful on the rocks. This is my personal favourite ;)</p>' +
         '<p>Bait: Lug, mackerel/bluey, sandeel and feathers/lures</p>'+ '</div>'],
         ['<div class="info_content">' +
         '<h3>Tarbert on The Shannon Estuary</h3>' +
@@ -49,7 +49,7 @@ function initMap() {
 
     var image = {
             url:"https://i.ibb.co/NVrPjGJ/sm.png",
-            size: new google.maps.Size(20, 32),
+            size: new google.maps.Size(25, 32),
             origin: new google.maps.Point(0, 0),
             anchor: new google.maps.Point(0, 32)
         };
@@ -83,16 +83,38 @@ function initMap() {
             }
         })(marker, i));
 
+         var request = {
+    location: (marks[i][1], marks[i][2]),
+    radius: '10000',
+    type: ['restaurant']
+  };
+
+  service = new google.maps.places.PlacesService(map);
+  service.nearbySearch(request, callback);
+
         // Center the map to fit all markers on the screen
-        map.fitBounds(bounds);
+        // map.fitBounds(bounds);
     }
 
     // Set zoom level
     var boundsListener = google.maps.event.addListener((map), 'bounds_changed', function(event) {
-        this.setZoom(9);
+        this.setZoom(8.5);
         google.maps.event.removeListener(boundsListener);
     });
     
 }
+
+function callback(results, status) {
+  if (status == google.maps.places.PlacesServiceStatus.OK) {
+    for (var i = 0; i < results.length; i++) {
+      var place = results[i];
+      createMarker(results[i]);
+    }
+  }
+}
+
+ var markerCluster = new MarkerClusterer(map, marks,
+            {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
+
 // Load initialize function
 google.maps.event.addDomListener(window, 'load', initMap);
