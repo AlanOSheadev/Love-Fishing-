@@ -46,16 +46,13 @@
         <div class="col-xs-12 col-s-12 col-md-8">
             <div id="map"></div>
         </div>
-        <div class="col-xs-12 col-sm-12 col-md-4">
-         <div id="right-panel">
-            <div class="search">
-            <h2>Results</h2>
-            <ul id="places"></ul>
-            <button id="more">More results</button>
-            </div>                        
-         </div>
+        <div class="col-xs-12 col-sm-12 col-md-4 search">
+            <button class="btn">All</button>
+            <button class="btn" data-type="restaurants">Restaurants</button>
+            <button class="btn" data-type="attractions">Attractions</button>
+            <button class="btn" data-type="hotels">Hotels</button>
+            <button class="btn" data-type="bait store">Bait</button>
         </div>
-    </div>
     <br>
 <footer>
     <ul class="nav justify-content-center">
@@ -92,5 +89,7 @@
     </script>
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCSENlQwLM6btnfzoUUCsVci5D-mGi8rzI&libraries=places&callback=initMap" async defer></script>
     <script src="assets/js/maps1.js"></script>
+    <!-- <script src="assets/js/places.js"></script> -->
+    <!-- <script src="assets/js/search.js"></script> -->
 </body>
 </html>

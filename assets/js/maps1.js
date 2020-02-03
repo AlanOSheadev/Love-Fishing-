@@ -2,12 +2,10 @@
 
 function initMap() {
             var bounds = new google.maps.LatLngBounds();
+            var kerry = {lat: 52.261062, lng: -9.683187};
             var map = new google.maps.Map(document.getElementById("map"), {
                 zoom: 8.5,
-                center: {
-                    lat: 52.261062,
-                    lng: -9.683187
-                }
+                center: kerry
             });
         
     // Multiple markers location, latitude, and longitude
@@ -84,6 +82,31 @@ function initMap() {
             }
         })(marker, i));
     }
+//         // set geocoder 
+//         var geocoder = new google.maps.Geocoder();
+
+//         //geocoder function
+
+//         search.geocode = function() 
+// {
+// 	var address = $('#address').val();
+// 	geocoder.geocode( { 'address': address}, function(results, status) {
+// 		if (status == google.maps.GeocoderStatus.OK) 
+// 		{
+// 			map.setCenter(results[0].geometry.location);
+// 			var marker = new google.maps.Marker({
+// 				map: map, 
+// 				position: results[0].geometry.location
+// 			});
+// 		} 
+// 		else 
+// 		{
+// 			alert("Geocode was not successful for the following reason: " + status);
+// 		}
+// 	});
+// }
+
+
 
      // Create the places service.
         var service = new google.maps.places.PlacesService(map);
@@ -96,7 +119,7 @@ function initMap() {
 
         // Perform a nearby search.
         service.nearbySearch(
-            {location: pyrmont, radius: 500, type: ['hotel']},
+            {location: kerry, radius: 30000, type: ['hotel']},
             function(results, status, pagination) {
               if (status !== 'OK') return;
 
@@ -106,7 +129,7 @@ function initMap() {
                 pagination.nextPage();
               };
             });
-      }
+      
 
       function createMarkers(places) {
         var bounds = new google.maps.LatLngBounds();
@@ -149,6 +172,8 @@ function initMap() {
     
 }
 
+google.maps.event.addDomListener(accomodation, 'click', createMarkers);
+
 function callback(results, status) {
   if (status == google.maps.places.PlacesServiceStatus.OK) {
     for (var i = 0; i < results.length; i++) {
@@ -157,9 +182,6 @@ function callback(results, status) {
     }
   }
 }
-
+}
  var markerCluster = new MarkerClusterer(map, marks,
             {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
-
-// Load initialize function
-google.maps.event.addDomListener(window, 'load', initMap);

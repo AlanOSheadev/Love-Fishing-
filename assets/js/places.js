@@ -19,7 +19,7 @@ function initMap() {
 
         // Perform a nearby search.
         service.nearbySearch(
-            {location: pyrmont, radius: 500, type: ['hotel']},
+            {location: pyrmont, radius: 5000, type: ['restaurant']},
             function(results, status, pagination) {
               if (status !== 'OK') return;
               
@@ -59,3 +59,5 @@ function initMap() {
         }
         map.fitBounds(bounds);
       }
+
+     google.maps.event.addDomListener(accomodation, 'click',initMap);
