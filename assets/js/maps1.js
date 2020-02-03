@@ -108,16 +108,27 @@ function initMap() {
 
 
 
-     // Create the places service.
+    //  Create the places service.
         var service = new google.maps.places.PlacesService(map);
-        var getNextPage = null;
-        var moreButton = document.getElementById('more');
-        moreButton.onclick = function() {
-          moreButton.disabled = true;
-          if (getNextPage) getNextPage();
-        };
+        // var getNextPage = null;
+        // var moreButton = document.getElementById('more');
+        // moreButton.onclick = function() {
+        //   moreButton.disabled = true;
+        //   if (getNextPage) getNextPage();
+        // };
 
         // Perform a nearby search.
+
+        const filterButtons = document.getElementsByClassName('btn');
+
+function handleClick(event) {
+  const type = event.target.getAttribute('data-type');
+  console.log(type);
+}
+
+Array.from(filterButtons).forEach(button => {
+  button.addEventListener('click', handleClick);
+});
         service.nearbySearch(
             {location: kerry, radius: 30000, type: ['hotel']},
             function(results, status, pagination) {

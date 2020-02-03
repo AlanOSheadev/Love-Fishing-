@@ -47,11 +47,24 @@
             <div id="map"></div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-4 search">
+             <label for="raddressInput">Search location:</label>
+         <input type="text" id="addressInput" size="15"/>
+        <label for="radiusSelect">Radius:</label>
+        <select id="radiusSelect" label="Radius">
+          <option value="50" selected>50 kms</option>
+          <option value="30">30 kms</option>
+          <option value="20">20 kms</option>
+          <option value="10">10 kms</option>
+        </select>
+ 
+        <!-- <input type="button" id="searchButton" value="Search"/> -->
+            <ul>
             <button class="btn">All</button>
-            <button class="btn" data-type="restaurants">Restaurants</button>
+            <button class="btn" data-type="restaurant">Restaurants</button>
             <button class="btn" data-type="attractions">Attractions</button>
-            <button class="btn" data-type="hotels">Hotels</button>
+            <button class="btn" data-type="accomodation">Hotels</button>
             <button class="btn" data-type="bait store">Bait</button>
+            </ul>
         </div>
     <br>
 <footer>
