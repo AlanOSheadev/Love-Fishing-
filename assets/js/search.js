@@ -1,17 +1,17 @@
-//  var map;
-//       var markers = [];
-//       var infoWindow;
-//       var locationSelect;
+ var map;
+      var markers = [];
+      var infoWindow;
+      var locationSelect;
 
-//         function initMap() {
-//           var sydney = {lat: -33.863276, lng: 151.107977};
-//           map = new google.maps.Map(document.getElementById('map'), {
-//             center: sydney,
-//             zoom: 11,
-//             mapTypeId: 'roadmap',
-//             mapTypeControlOptions: {style: google.maps.MapTypeControlStyle.DROPDOWN_MENU}
-//           });
-//           infoWindow = new google.maps.InfoWindow();
+        function initMap() {
+          var sydney = {lat: -33.863276, lng: 151.107977};
+          map = new google.maps.Map(document.getElementById('map'), {
+            center: sydney,
+            zoom: 11,
+            mapTypeId: 'roadmap',
+            mapTypeControlOptions: {style: google.maps.MapTypeControlStyle.DROPDOWN_MENU}
+          });
+          infoWindow = new google.maps.InfoWindow();
 
           searchButton = document.getElementById("searchButton").onclick = searchLocations;
 
@@ -101,30 +101,30 @@
           locationSelect.appendChild(option);
        }
 
-    //    function downloadUrl(url, callback) {
-    //       var request = window.ActiveXObject ?
-    //           new ActiveXObject('Microsoft.XMLHTTP') :
-    //           new XMLHttpRequest;
+       function downloadUrl(url, callback) {
+          var request = window.ActiveXObject ?
+              new ActiveXObject('Microsoft.XMLHTTP') :
+              new XMLHttpRequest;
 
-    //       request.onreadystatechange = function() {
-    //         if (request.readyState == 4) {
-    //           request.onreadystatechange = doNothing;
-    //           callback(request.responseText, request.status);
-    //         }
-    //       };
+          request.onreadystatechange = function() {
+            if (request.readyState == 4) {
+              request.onreadystatechange = doNothing;
+              callback(request.responseText, request.status);
+            }
+          };
 
-    //       request.open('GET', url, true);
-    //       request.send(null);
-    //    }
+          request.open('GET', url, true);
+          request.send(null);
+       }
 
-    //    function parseXml(str) {
-    //       if (window.ActiveXObject) {
-    //         var doc = new ActiveXObject('Microsoft.XMLDOM');
-    //         doc.loadXML(str);
-    //         return doc;
-    //       } else if (window.DOMParser) {
-    //         return (new DOMParser).parseFromString(str, 'text/xml');
-    //       }
-    //    }
+       function parseXml(str) {
+          if (window.ActiveXObject) {
+            var doc = new ActiveXObject('Microsoft.XMLDOM');
+            doc.loadXML(str);
+            return doc;
+          } else if (window.DOMParser) {
+            return (new DOMParser).parseFromString(str, 'text/xml');
+          }
+       }
 
        function doNothing() {}

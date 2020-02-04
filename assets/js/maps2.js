@@ -82,10 +82,10 @@ function initMap() {
             }
         })(marker, i));
     }
-        // set geocoder 
+//         // set geocoder 
         var geocoder = new google.maps.Geocoder();
 
-        //geocoder function
+//         //geocoder function
 
         search.geocode = function() 
 {
@@ -108,34 +108,43 @@ function initMap() {
 
 
 
-     // Create the places service.
+    //  Create the places service.
         var service = new google.maps.places.PlacesService(map);
-        var radius = document.getElementById('radiusSelect').value;
-        const type = event.target.getAttribute('data-type');
-        var getNextPage = null;
-        var moreButton = document.getElementById('more');
-        moreButton.onclick = function() {
-          moreButton.disabled = true;
-          if (getNextPage) getNextPage();
-        };
+        // var getNextPage = null;
+        // var moreButton = document.getElementById('more');
+        // moreButton.onclick = function() {
+        //   moreButton.disabled = true;
+        //   if (getNextPage) getNextPage();
+        // };
 
         // Perform a nearby search.
+
+        const filterButtons = document.getElementsByClassName('btn');
+
+function handleClick(event) {
+  const type = event.target.getAttribute('data-type');
+//   console.log(type);
+}
+
+Array.from(filterButtons).forEach(button => {
+  button.addEventListener('click', handleClick);
+});
         service.nearbySearch(
-            {location: kerry, radius: radius, type: type},
+            {location: address, radius: 30000, type: type},
             function(results, status, pagination) {
               if (status !== 'OK') return;
 
-              createMarkers(results);
-              moreButton.disabled = !pagination.hasNextPage;
-              getNextPage = pagination.hasNextPage && function() {
-                pagination.nextPage();
-              };
+            //   createMarkers(results);
+            //   moreButton.disabled = !pagination.hasNextPage;
+            //   getNextPage = pagination.hasNextPage && function() {
+            //     pagination.nextPage();
+            //   };
             });
       
 
       function createMarkers(places) {
         var bounds = new google.maps.LatLngBounds();
-        var placesList = document.getElementById('places');
+        var placesList = document.getElementsByClassName('btn');
 
         for (var i = 0, place; place = places[i]; i++) {
           var image = {
@@ -174,7 +183,7 @@ function initMap() {
     
 }
 
-google.maps.event.addDomListener(accomodation, 'click', createMarkers);
+// google.maps.event.addDomListener(accomodation, 'click', createMarkers);
 
 function callback(results, status) {
   if (status == google.maps.places.PlacesServiceStatus.OK) {
