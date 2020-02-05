@@ -48,7 +48,7 @@ function initMap() {
 
     var image = {
             url:"https://i.ibb.co/NVrPjGJ/sm.png",
-            size: new google.maps.Size(25, 32),
+            size: new google.maps.Size(35, 52),
             origin: new google.maps.Point(0, 0),
             anchor: new google.maps.Point(0, 32)
         };
@@ -83,35 +83,43 @@ function initMap() {
         })(marker, i));
     }
         // set geocoder 
-        var geocoder = new google.maps.Geocoder();
+        // var geocoder = new google.maps.Geocoder();
 
         //geocoder function
 
-        search.geocode = function() 
-{
-	var address = $('#address').val();
-	geocoder.geocode( { 'address': address}, function(results, status) {
-		if (status == google.maps.GeocoderStatus.OK) 
-		{
-			map.setCenter(results[0].geometry.location);
-			var marker = new google.maps.Marker({
-				map: map, 
-				position: results[0].geometry.location
-			});
-		} 
-		else 
-		{
-			alert("Geocode was not successful for the following reason: " + status);
-		}
-	});
-}
+//         search.geocode = function() 
+// {
+// 	var address = $('#address').val();
+// 	geocoder.geocode( { 'address': address}, function(results, status) {
+// 		if (status == google.maps.GeocoderStatus.OK) 
+// 		{
+// 			map.setCenter(results[0].geometry.location);
+// 			var marker = new google.maps.Marker({
+// 				map: map, 
+// 				position: results[0].geometry.location
+// 			});
+// 		} 
+// 		else 
+// 		{
+// 			alert("Geocode was not successful for the following reason: " + status);
+// 		}
+// 	});
+// }
 
+        const filterButtons = document.getElementsByClassName('btn');
+
+        function handleClick(event) {
+        const type = event.target.getAttribute('data-type');
+        }
+
+        Array.from(filterButtons).forEach(button => {
+        button.addEventListener('click', handleClick);
+        });
 
 
      // Create the places service.
         var service = new google.maps.places.PlacesService(map);
         var radius = document.getElementById('radiusSelect').value;
-        const type = event.target.getAttribute('data-type');
         var getNextPage = null;
         var moreButton = document.getElementById('more');
         moreButton.onclick = function() {
@@ -174,7 +182,7 @@ function initMap() {
     
 }
 
-google.maps.event.addDomListener(accomodation, 'click', createMarkers);
+// google.maps.event.addDomListener(type, 'click', createMarkers);
 
 function callback(results, status) {
   if (status == google.maps.places.PlacesServiceStatus.OK) {
@@ -185,5 +193,5 @@ function callback(results, status) {
   }
 }
 }
- var markerCluster = new MarkerClusterer(map, marks,
-            {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
+//  var markerCluster = new MarkerClusterer(map, marker,
+//             {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});

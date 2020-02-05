@@ -1,91 +1,188 @@
+// ---- Taken from Codex turotials on multiple markers info windows ----
+var ma =[];
  function initMap() {
-            var map = new google.maps.Map(document.getElementById("map"), {
-                zoom: 9,
-                center: {
-                    lat: 52.261062,
-                    lng: -9.683187
-                }
-            });
-            setMarkers(map);
-      }
-// ---- Taken from Google turotials on complex markers ----
-      var marks = [
-        ['Kells Bay,beach, pier and rock fishing, the beach and pier are accessible but be careful on the rocks, bait: lug, sandeel and mackerel', 52.025557, -10.103597, 4],
+    var bounds = new google.maps.LatLngBounds();
+    var kerry = { lat: 52.261062, lng: -9.683187 };
+    var map = new google.maps.Map(document.getElementById("map"), {
+        zoom: 8.5,
+        center: kerry
+    });
+
+    // Multiple markers location, latitude, and longitude
+    var marks = [
+        ['Kells Bay', 52.025557, -10.103597, 4],
         ['Valentia Island Bridge', 51.889028, -10.365987, 5],
         ['Inch Beach', 52.127794, -9.972862, 3],
         ['Fenit Pier', 52.273029, -9.864129, 2],
         ['Tarbert on the Shannon Estuary', 52.586859, -9.358040, 1]
-      ];
-
-         // Info window content
-    var infoWindowContent = [
-        ['<div class="info_content">' +
-        '<h3>Brooklyn Museum</h3>' +
-        '<p>The Brooklyn Museum is an art museum located in the New York City borough of Brooklyn.</p>' + '</div>'],
-        ['<div class="info_content">' +
-        '<h3>Brooklyn Public Library</h3>' +
-        '<p>The Brooklyn Public Library (BPL) is the public library system of the borough of Brooklyn, in New York City.</p>' +
-        '</div>'],
-        ['<div class="info_content">' +
-        '<h3>Prospect Park Zoo</h3>' +
-        '<p>The Prospect Park Zoo is a 12-acre (4.9 ha) zoo located off Flatbush Avenue on the eastern side of Prospect Park, Brooklyn, New York City.</p>' +
-        '</div>']
     ];
 
-      function setMarkers(map) {
-          var image = {
-            url:"https://i.ibb.co/NVrPjGJ/sm.png",
-            size: new google.maps.Size(20, 32),
-            origin: new google.maps.Point(0, 0),
-            anchor: new google.maps.Point(0, 32)
-        };
-       
-        var shape = {
-          coords: [1, 1, 1, 20, 18, 20, 18, 1],
-          type: 'poly'
-        };
+    // Info window content
+    var infoWindowContent = [
+        ['<div class="info_content">' +
+            '<h3>Kells Bay</h3>' +
+            '<p>Beach, Pier and Rock fishing.</p>' +
+            '<p>The beach and pier are easily accessible but be careful on the rocks.</p>' +
+            '<p>Bait: Lug, mackerel,lures and sandeel.</p>' + '</div>'],
+        ['<div class="info_content">' +
+            '<h3>Valentia Island</h3>' +
+            '<p>Beach, Pier and Rock fishing.</p>' +
+            '<p>The beach and pier are easily accessible but be careful on the rocks.</p>' +
+            '<p>Bait: Lug, mackerel, sandeel and lures.</p>' + '</div>'],
+        ['<div class="info_content">' +
+            '<h3>Inch Beach</h3>' +
+            '<p>Beach fishing at its finest one of Irelands premier beach marks.</p>' +
+            '<p>The beach is easily accessible but be careful on the rocks, people often drive onto the beach but be mindful of the tide as is comes in quickly and has caught out some in the past.</p>' +
+            '<p>Bait: Lug, mackerel and sandeel</p>' + '</div>'],
+        ['<div class="info_content">' +
+            '<h3>Fenit Pier</h3>' +
+            '<p>Pier and Rock fishing.</p>' +
+            '<p>The pier is easily accessible, one can simply drive down and park on the pier, but be careful on the rocks. This is my personal favourite ;)</p>' +
+            '<p>Bait: Lug, mackerel/bluey, sandeel and feathers/lures</p>' + '</div>'],
+        ['<div class="info_content">' +
+            '<h3>Tarbert on The Shannon Estuary</h3>' +
+            '<p>Beach, Pier and Rock fishing.</p>' +
+            '<p>The beach and pier are easily accessible but be careful on the rocks</p>' +
+            '<p>Bait: Lug, mackerel and sandeel</p>' + '</div>']
+    ];
 
-        var infoWindow = new google.maps.InfoWindow(), marker, i;
+    var image = {
+        url: "https://i.ibb.co/NVrPjGJ/sm.png",
+        size: new google.maps.Size(50, 75),
+        origin: new google.maps.Point(0, 0),
+        anchor: new google.maps.Point(0, 32)
+    };
 
-        for (var i = 0; i < marks.length; i++) {
-          var mark = marks[i];
-          var position = new google.maps.LatLng(mark[1], mark[2]);
-          var marker = new google.maps.Marker({
-            position: position ,
+    var shape = {
+        coords: [1, 1, 1, 20, 18, 20, 18, 1],
+        type: 'poly'
+    };
+
+
+    // Add multiple markers to map
+    var infoWindow = new google.maps.InfoWindow(), marker, i;
+
+    // Place each marker on the map  
+    for (i = 0; i < marks.length; i++) {
+        var position = new google.maps.LatLng(marks[i][1], marks[i][2]);
+        bounds.extend(position);
+        marker = new google.maps.Marker({
+            position: position,
             map: map,
             icon: image,
             shape: shape,
-            title: mark[0],
-            zIndex: mark[3]
-          });
-    }
-    
-// ---- Taken from Codex turotials on multiple markers info windows ----
+            title: marks[i][0]
+        });
 
-       
         // Add info window to marker    
-        google.maps.event.addListener(marker, 'click', (function(marker, i) {
-            return function() {
+        google.maps.event.addListener(marker, 'click', (function (marker, i) {
+            return function () {
                 infoWindow.setContent(infoWindowContent[i][0]);
                 infoWindow.open(map, marker);
             }
         })(marker, i));
-      }
+    }   
+   // } was here
 
-    //     // Center the map to fit all markers on the screen
-    //     map.fitBounds(bounds);
-    
+// ---- Developed with mentor  ----
 
-    // // Set zoom level
-    // var boundsListener = google.maps.event.addListener((map), 'bounds_changed', function(event) {
-    //     this.setZoom(9);
-    //     google.maps.event.removeListener(boundsListener);
-    // });
-   
+    const filterButtons = document.getElementsByClassName('btn');
 
-      var markerCluster = new MarkerClusterer(map, marks,
-            {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
-    
-// https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=hotel&inputtype=textquery&fields=photos,formatted_address,name,opening_hours,rating&locationbias=circle:2000@lat: mark[1], lng: mark[2]&key=AIzaSyCSENlQwLM6btnfzoUUCsVci5D-mGi8rzI
+    function handleClick(event) {
+        const type = event.target.getAttribute('data-type');
+        
+    }
 
-// https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=mark[1],lng: mark[2]&radius=15000&type=restaurant&key=YOUR_API_KEY=AIzaSyCSENlQwLM6btnfzoUUCsVci5D-mGi8rzI
+    Array.from(filterButtons).forEach(button => {
+        button.addEventListener('click', handleClick);
+    });
+
+    // ---- Here I'm adding multiple sources together to create the funcionality I want ----
+
+    // Create the places service.
+    var service = new google.maps.places.PlacesService(map);
+    var getNextPage = null;
+    var moreButton = document.getElementById('more');
+    moreButton.onclick = function () {
+        moreButton.disabled = true;
+        if (getNextPage) getNextPage();
+    }
+
+    // Perform a nearby search.
+    // service.nearbySearch(
+    //     { location: kerry, radius: 15000, type: ['restaurant']}, //  I thought that i could use the type defined by the buttons above to change the output ???
+    //     function (results, status, pagination) {
+    //         if (status !== 'OK') return;
+
+    //         createMarkers(results);
+    //         moreButton.disabled = !pagination.hasNextPage;
+    //         getNextPage = pagination.hasNextPage && function () {
+    //             pagination.nextPage();
+    //         };
+    //     });
+    //     console.log(service.nearbySearch);
+
+    function getNearbyPlaces() {
+    let request = {
+    location: kerry,
+    radius: 50000,
+    keyword: type
+    };
+console.log(getNearbyPlaces)
+    service = new google.maps.places.PlacesService(map);
+    service.nearbySearch(request, nearbyCallback);
+}
+
+// Handle the results (up to 20) of the Nearby Search
+function nearbyCallback(results, status) {
+    if (status == google.maps.places.PlacesServiceStatus.OK) {
+    createMarkers(results);
+    }
+}
+
+/* TODO: Step 3C, Generate markers for search results */
+
+/* TODO: Step 3B2, Call the Places Nearby Search */
+// Call Places Nearby Search on user's location
+getNearbyPlaces(kerry);
+
+/* TODO: Step 3B3, Call the Places Nearby Search */
+// Call Places Nearby Search on the default location
+getNearbyPlaces(kerry);
+
+
+function createMarkers(places) {
+    var bounds = new google.maps.LatLngBounds();
+    var placesList = document.getElementById('places');
+
+    for (var i = 0, place; place = places[i]; i++) {
+        var image = {
+            url: place.icon,
+            size: new google.maps.Size(71, 71),
+            origin: new google.maps.Point(0, 0),
+            anchor: new google.maps.Point(17, 34),
+            scaledSize: new google.maps.Size(25, 25)
+        };
+
+        var marker = new google.maps.Marker({
+            map: map,
+            icon: image,
+            title: place.name,
+            position: place.geometry.location
+        });
+
+        ma.push(marker);
+        console.log(ma);
+
+        var li = document.createElement('li');
+        li.textContent = place.name;
+        placesList.appendChild(li);
+
+        bounds.extend(place.geometry.location);
+    }
+    // map.fitBounds(bounds);
+}
+
+google.maps.event.addDomListener(getNearbyPlaces, 'handleClick', initMap);
+
+}
