@@ -10,6 +10,13 @@ var ma =[];
         center: kerry
     });
 
+//  function clearOverlays () {
+//             for (var i = 0; i < ma.length; i++ ) {
+//             ma[i].setMap(null);
+//                 }
+//             ma.length = 0;
+//            }
+
     // Multiple markers location, latitude, and longitude
     var marks = [
         ['Kells Bay', 52.025557, -10.103597, 4],
@@ -105,8 +112,6 @@ var ma =[];
     var service = new google.maps.places.PlacesService(map);
     var getNextPage = null;
     
-    
-   
 
     function getNearbyPlaces(kerry) {
     let request = {
@@ -134,17 +139,8 @@ getNearbyPlaces(kerry);
 
 function createMarkers(places) {
      if (status == google.maps.places.PlacesServiceStatus.OK) {
-        google.maps.Map.prototype.clearOverlays = function() {
-            for (var i = 0; i < ma.length; i++ ) {
-            ma[i].setMap(null);
-                }
-            ma.length = 0;
-           }
     var bounds = new google.maps.LatLngBounds();
     var placesList = document.getElementById('places');
-    // var typemarker = [];
-
-    
 
     for (var i = 0, place; place = places[i]; i++) {
         
@@ -165,8 +161,8 @@ function createMarkers(places) {
             title: place.name,
             position: place.geometry.location
         });
-        ma.push(marker);
-        console.log(ma);
+        // ma.push(typemarker);
+        // console.log(ma);
 
         var li = document.createElement('li');
         li.textContent = place.name;

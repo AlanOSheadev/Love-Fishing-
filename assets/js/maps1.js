@@ -1,4 +1,5 @@
 // ---- Taken from Codex turotials on multiple markers info windows ----
+var type;
 
 function initMap() {
             var bounds = new google.maps.LatLngBounds();
@@ -109,7 +110,8 @@ function initMap() {
         const filterButtons = document.getElementsByClassName('btn');
 
         function handleClick(event) {
-        const type = event.target.getAttribute('data-type');
+        var type = event.target.getAttribute('data-type');
+        service.nearbySearch();
         }
 
         Array.from(filterButtons).forEach(button => {
