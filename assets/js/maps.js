@@ -95,11 +95,12 @@ var markers =[];
     //     }
     // }
 
-     const filterButtons = document.getElementsByClassName('btn');
+    const filterButtons = document.getElementsByClassName('btn');
  
     function handleClick(event) {
         var type = event.target.getAttribute('data-type');
         findPlaces();
+        console.log(type);
     }
  
     Array.from(filterButtons).forEach(button => {
@@ -117,11 +118,14 @@ var markers =[];
             keyword: type
         };
 
-        // console.log(request);
-
+        console.log(request);
+        
         service = new google.maps.places.PlacesService(map);
         service.search(request, createMarkers);
     }
+
+    
+
     function createMarkers(places) {
      if (status == google.maps.places.PlacesServiceStatus.OK) {
     var bounds = new google.maps.LatLngBounds();
@@ -147,7 +151,12 @@ var markers =[];
             position: place.geometry.location
         });
 
-        places.push(markers);
+    //     google.maps.event.addListener(btn, 'click', function() {
+    //     clearOverlays();
+    //     infowindow.open(map,mark);
+    // });
+    // markers.push();
+
 
         var li = document.createElement('li');
         li.textContent = place.name;
