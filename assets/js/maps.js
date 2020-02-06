@@ -1,4 +1,5 @@
 // ---- Taken from Codex turotials on multiple markers info windows ----
+var map;
 var type;
 var radius;
 var markers =[];
@@ -107,10 +108,36 @@ var markers =[];
         button.addEventListener('click', handleClick);
     });
 
-   
+    function findAddress() {
+    var address = document.getElementById("location").value;
+    // script uses our 'geocoder' in order to find location by address name
+    geocoder.geocode( { 'address': address}, function(results, status) {
+        if (status == google.maps.GeocoderStatus.OK) { // and, if everything is ok
+            // we will center map
+            var addrLocation = results[0].geometry.location;
+            map.setCenter(addrLocation);
+            // store current coordinates into hidden variables
+            document.getElementById('lat').value = results[0].geometry.location.lat();
+            document.getElementById('lng').value = results[0].geometry.location.lng();
+            // and then - add new custom marker
+            var addrMarker = new google.maps.Marker({
+                position: addrLocation,
+                map: map,
+                title: results[0].formatted_address,
+                icon: 'marker.png'
+            });
+        } else {
+            alert('Geocode was not successful for the following reason: ' + status);
+        }
+    });
+
+}
+
+
     function findPlaces (){
         var type = event.target.getAttribute('data-type');
         var radius = document.getElementById('radiusSelect').value;
+         var address = document.getElementById("location").value;
 
         var request = {
             location: kerry,
@@ -162,12 +189,12 @@ var markers =[];
         li.textContent = place.name;
         placesList.appendChild(li);
 
-        bounds.extend(place.geometry.location);
+        // bounds.extend(place.geometry.location);
         }
     }
 }
 
-google.maps.event.addDomListener(window, 'load', initMap);
+// google.maps.event.addDomListener(window, 'load', initMap);
 
  }
 
