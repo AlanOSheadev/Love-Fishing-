@@ -1,5 +1,8 @@
 // ---- Taken from Codex turotials on multiple markers info windows ----
-var ma =[];
+var type;
+var radius;
+var markers =[];
+
  function initMap() {
     var bounds = new google.maps.LatLngBounds();
     var kerry = { lat: 52.261062, lng: -9.683187 };
@@ -66,7 +69,7 @@ var ma =[];
     for (i = 0; i < marks.length; i++) {
         var position = new google.maps.LatLng(marks[i][1], marks[i][2]);
         bounds.extend(position);
-        marker = new google.maps.Marker({
+        infos = new google.maps.Marker({
             position: position,
             map: map,
             icon: image,
@@ -75,88 +78,59 @@ var ma =[];
         });
 
         // Add info window to marker    
-        google.maps.event.addListener(marker, 'click', (function (marker, i) {
+        google.maps.event.addListener(infos, 'click', (function (infos, i) {
             return function () {
                 infoWindow.setContent(infoWindowContent[i][0]);
-                infoWindow.open(map, marker);
+                infoWindow.open(map, infos);
             }
-        })(marker, i));
-    }   
-   // } was here
+        })(infos, i));
+    }  
+    
+    // function clearOverlays() {
+    // if (markers) {
+    //     for (i in markers) {
+    //         markers[i].setMap(null);
+    //         }
+    //     markers = [];
+    //     }
+    // }
 
-// ---- Developed with mentor  ----
-
-    const filterButtons = document.getElementsByClassName('btn');
-
+     const filterButtons = document.getElementsByClassName('btn');
+ 
     function handleClick(event) {
-        const type = event.target.getAttribute('data-type');
-        
+        var type = event.target.getAttribute('data-type');
+        findPlaces();
     }
-
+ 
     Array.from(filterButtons).forEach(button => {
         button.addEventListener('click', handleClick);
     });
 
-    // ---- Here I'm adding multiple sources together to create the funcionality I want ----
+   
+    function findPlaces (){
+        var type = event.target.getAttribute('data-type');
+        var radius = document.getElementById('radiusSelect').value;
 
-    // Create the places service.
-    var service = new google.maps.places.PlacesService(map);
-    var getNextPage = null;
-    var moreButton = document.getElementById('more');
-    moreButton.onclick = function () {
-        moreButton.disabled = true;
-        if (getNextPage) getNextPage();
+        var request = {
+            location: kerry,
+            radius: radius,
+            keyword: type
+        };
+
+        // console.log(request);
+
+        service = new google.maps.places.PlacesService(map);
+        service.search(request, createMarkers);
     }
-
-    // Perform a nearby search.
-    // service.nearbySearch(
-    //     { location: kerry, radius: 15000, type: ['restaurant']}, //  I thought that i could use the type defined by the buttons above to change the output ???
-    //     function (results, status, pagination) {
-    //         if (status !== 'OK') return;
-
-    //         createMarkers(results);
-    //         moreButton.disabled = !pagination.hasNextPage;
-    //         getNextPage = pagination.hasNextPage && function () {
-    //             pagination.nextPage();
-    //         };
-    //     });
-    //     console.log(service.nearbySearch);
-
-    function getNearbyPlaces() {
-    let request = {
-    location: kerry,
-    radius: 50000,
-    keyword: type
-    };
-console.log(getNearbyPlaces)
-    service = new google.maps.places.PlacesService(map);
-    service.nearbySearch(request, nearbyCallback);
-}
-
-// Handle the results (up to 20) of the Nearby Search
-function nearbyCallback(results, status) {
-    if (status == google.maps.places.PlacesServiceStatus.OK) {
-    createMarkers(results);
-    }
-}
-
-/* TODO: Step 3C, Generate markers for search results */
-
-/* TODO: Step 3B2, Call the Places Nearby Search */
-// Call Places Nearby Search on user's location
-getNearbyPlaces(kerry);
-
-/* TODO: Step 3B3, Call the Places Nearby Search */
-// Call Places Nearby Search on the default location
-getNearbyPlaces(kerry);
-
-
-function createMarkers(places) {
+    function createMarkers(places) {
+     if (status == google.maps.places.PlacesServiceStatus.OK) {
     var bounds = new google.maps.LatLngBounds();
     var placesList = document.getElementById('places');
 
     for (var i = 0, place; place = places[i]; i++) {
+        
         var image = {
+            
             url: place.icon,
             size: new google.maps.Size(71, 71),
             origin: new google.maps.Point(0, 0),
@@ -164,25 +138,32 @@ function createMarkers(places) {
             scaledSize: new google.maps.Size(25, 25)
         };
 
-        var marker = new google.maps.Marker({
+        
+        var markers = new google.maps.Marker({
+            
             map: map,
             icon: image,
             title: place.name,
             position: place.geometry.location
         });
 
-        ma.push(marker);
-        console.log(ma);
+        places.push(markers);
 
         var li = document.createElement('li');
         li.textContent = place.name;
         placesList.appendChild(li);
 
         bounds.extend(place.geometry.location);
+        }
     }
-    // map.fitBounds(bounds);
 }
 
-google.maps.event.addDomListener(getNearbyPlaces, 'handleClick', initMap);
+google.maps.event.addDomListener(window, 'load', initMap);
 
-}
+ }
+
+
+
+
+   
+    
