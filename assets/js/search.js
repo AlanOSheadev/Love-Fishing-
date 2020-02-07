@@ -48,21 +48,21 @@ var radius
 
     // I created a custom image Rodfendr for these markers
 
-    // var image = {
-    //     url: "https://i.ibb.co/NVrPjGJ/sm.png",
-    //     size: new google.maps.Size(50, 75),
-    //     origin: new google.maps.Point(0, 0),
-    //     anchor: new google.maps.Point(0, 32)
-    // };
+    var image = {
+        url: "https://i.ibb.co/NVrPjGJ/sm.png",
+        size: new google.maps.Size(50, 75),
+        origin: new google.maps.Point(0, 0),
+        anchor: new google.maps.Point(0, 32)
+    };
 
-    // var shape = {
-    //     coords: [1, 1, 1, 20, 18, 20, 18, 1],
-    //     type: 'poly'
-    // };
+    var shape = {
+        coords: [1, 1, 1, 20, 18, 20, 18, 1],
+        type: 'poly'
+    };
 
 
     // Add multiple markers to map
-    // var infoWindow = new google.maps.InfoWindow(), marker, i;
+    var infoWindow = new google.maps.InfoWindow(), infos, i;
 
     // Place each marker on the map  
     // for (i = 0; i < marks.length; i++) {
