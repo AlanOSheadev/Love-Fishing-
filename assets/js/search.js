@@ -1,25 +1,29 @@
 var map;
 var kerry = { lat: 52.261062, lng: -9.683187 };
+var radius
 
       function initMap() {
         // Create the map.
         map = new google.maps.Map(document.getElementById('map'), {
           center: kerry,
-          zoom: 17
+          zoom: 8.5
         });
 
         // Create the places service.
         var service = new google.maps.places.PlacesService(map);
+        var radius = document.getElementById('radiusSelect').value;
         var getNextPage = null;
         var moreButton = document.getElementById('more');
         moreButton.onclick = function() {
           moreButton.disabled = true;
           if (getNextPage) getNextPage();
         };
+        var type = document.getElementsByClassName('btn').data-type;
+
 
         // Perform a nearby search.
         service.nearbySearch(
-            {location: kerry, radius: 500, type: ['store']},
+            {location: kerry, radius: radius, type: type},
             function(results, status, pagination) {
               if (status !== 'OK') return;
 
