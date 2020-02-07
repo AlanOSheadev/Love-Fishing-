@@ -18,7 +18,7 @@ var radius
           moreButton.disabled = true;
           if (getNextPage) getNextPage();
         };
-        var type = document.getElementsByClassName('btn').data-type;
+        var type = document.getElementsByClassName('btn').value;
 
 
         // Perform a nearby search.
@@ -36,7 +36,7 @@ var radius
       }
 
       function createMarkers(places) {
-        var bounds = new google.maps.LatLngBounds();
+        // var bounds = new google.maps.LatLngBounds();
         var placesList = document.getElementById('places');
 
         for (var i = 0, place; place = places[i]; i++) {
@@ -59,7 +59,7 @@ var radius
           li.textContent = place.name;
           placesList.appendChild(li);
 
-          bounds.extend(place.geometry.location);
+        //   bounds.extend(place.geometry.location);
         }
-        map.fitBounds(bounds);
+        // map.fitBounds(bounds);
       }
