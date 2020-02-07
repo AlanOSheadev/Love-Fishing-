@@ -17,34 +17,34 @@ var radius
         ['Tarbert on the Shannon Estuary', 52.586859, -9.358040, 1]
     ];
 
-    // // Info window content
-    // var infoWindowContent = [
-    //     ['<div class="info_content">' +
-    //         '<h3>Kells Bay</h3>' +
-    //         '<p>Beach, Pier and Rock fishing.</p>' +
-    //         '<p>The beach and pier are easily accessible but be careful on the rocks.</p>' +
-    //         '<p>Bait: Lug, mackerel,lures and sandeel.</p>' + '</div>'],
-    //     ['<div class="info_content">' +
-    //         '<h3>Valentia Island</h3>' +
-    //         '<p>Beach, Pier and Rock fishing.</p>' +
-    //         '<p>The beach and pier are easily accessible but be careful on the rocks.</p>' +
-    //         '<p>Bait: Lug, mackerel, sandeel and lures.</p>' + '</div>'],
-    //     ['<div class="info_content">' +
-    //         '<h3>Inch Beach</h3>' +
-    //         '<p>Beach fishing at its finest one of Irelands premier beach marks.</p>' +
-    //         '<p>The beach is easily accessible but be careful on the rocks, people often drive onto the beach but be mindful of the tide as is comes in quickly and has caught out some in the past.</p>' +
-    //         '<p>Bait: Lug, mackerel and sandeel</p>' + '</div>'],
-    //     ['<div class="info_content">' +
-    //         '<h3>Fenit Pier</h3>' +
-    //         '<p>Pier and Rock fishing.</p>' +
-    //         '<p>The pier is easily accessible, one can simply drive down and park on the pier, but be careful on the rocks. This is my personal favourite ;)</p>' +
-    //         '<p>Bait: Lug, mackerel/bluey, sandeel and feathers/lures</p>' + '</div>'],
-    //     ['<div class="info_content">' +
-    //         '<h3>Tarbert on The Shannon Estuary</h3>' +
-    //         '<p>Beach, Pier and Rock fishing.</p>' +
-    //         '<p>The beach and pier are easily accessible but be careful on the rocks</p>' +
-    //         '<p>Bait: Lug, mackerel and sandeel</p>' + '</div>']
-    // ];
+    // Info window content
+    var infoWindowContent = [
+        ['<div class="info_content">' +
+            '<h3>Kells Bay</h3>' +
+            '<p>Beach, Pier and Rock fishing.</p>' +
+            '<p>The beach and pier are easily accessible but be careful on the rocks.</p>' +
+            '<p>Bait: Lug, mackerel,lures and sandeel.</p>' + '</div>'],
+        ['<div class="info_content">' +
+            '<h3>Valentia Island</h3>' +
+            '<p>Beach, Pier and Rock fishing.</p>' +
+            '<p>The beach and pier are easily accessible but be careful on the rocks.</p>' +
+            '<p>Bait: Lug, mackerel, sandeel and lures.</p>' + '</div>'],
+        ['<div class="info_content">' +
+            '<h3>Inch Beach</h3>' +
+            '<p>Beach fishing at its finest one of Irelands premier beach marks.</p>' +
+            '<p>The beach is easily accessible but be careful on the rocks, people often drive onto the beach but be mindful of the tide as is comes in quickly and has caught out some in the past.</p>' +
+            '<p>Bait: Lug, mackerel and sandeel</p>' + '</div>'],
+        ['<div class="info_content">' +
+            '<h3>Fenit Pier</h3>' +
+            '<p>Pier and Rock fishing.</p>' +
+            '<p>The pier is easily accessible, one can simply drive down and park on the pier, but be careful on the rocks. This is my personal favourite ;)</p>' +
+            '<p>Bait: Lug, mackerel/bluey, sandeel and feathers/lures</p>' + '</div>'],
+        ['<div class="info_content">' +
+            '<h3>Tarbert on The Shannon Estuary</h3>' +
+            '<p>Beach, Pier and Rock fishing.</p>' +
+            '<p>The beach and pier are easily accessible but be careful on the rocks</p>' +
+            '<p>Bait: Lug, mackerel and sandeel</p>' + '</div>']
+    ];
 
     // I created a custom image Rodfendr for these markers
 
