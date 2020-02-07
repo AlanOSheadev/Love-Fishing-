@@ -49,14 +49,21 @@
          <label for="raddressInput" id="location">Search location:</label>
          <input type="text" id="addressInput" size="15"/>
          <br> </br> 
-          <ul>
-            <!-- <li><button class="btn">All</button></li> -->
-            <li><button class="btn" data-type="restaurant">Restaurants</button></li>
-            <li><button class="btn" data-type="attractions">Attractions</button></li>
-            <li><button class="btn" data-type="hotel">Hotels</button></li>
-            <li><button class="btn" data-type="accomodation">B & B's</button></li>
-            <li><button class="btn" data-type="bait">Bait Shops</button></li>
-            </ul>
+        <!-- <ul>
+            <li><button class="btn" value="restaurant">Restaurants</button></li>
+            <li><button class="btn" value="attractions">Attractions</button></li>
+            <li><button class="btn" value="hotel">Hotels</button></li>
+            <li><button class="btn" value="accomodation">B & B's</button></li>
+            <li><button class="btn" value="bait">Bait Shops</button></li>
+        </ul> -->
+        <label for="outlet">Search Nearby:</label>
+        <select id="outlet" label="Radius">
+          <option value="restaurant">Restaurants</option>
+          <option value="attractions">Attractions</option>
+          <option value="hotel">Hotels</option>
+          <option value="accomodation">B & B's</option>
+          <option value="bait" selected>Bait & Tackle Shops</option>
+        </select>
             <br> </br>
         <label for="radiusSelect">Radius:</label>
         <select id="radiusSelect" label="Radius">
@@ -73,7 +80,7 @@
             <div class="search">
             <h2>Results</h2>
             <ul id="places"></ul>
-            <!-- <button id="more">More results</button> -->
+            <button id="more">Refresh</button>
             </div>            
         </div>
     </div>
@@ -116,7 +123,7 @@
     <!-- <script src="assets/js/places.js"></script> -->
     <!-- <script src="assets/js/search.js"></script> -->
     <!-- <script src="assets/js/maps2.js"></script> -->
-    <!-- <script src="assets/js/searchbar.js"></script> -->
+    <!-- <script src="assets/js/api.js"></script> -->
     <script src="assets/js/maps.js"></script>
 </body>
 </html>
