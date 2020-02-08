@@ -46,32 +46,64 @@
         </div>
         <div class="col-xs-12 col-sm-12 col-md-4">
         <div>
-         <label for="raddressInput" id="location">Search location:</label>
+        <div class="actions">
+    <div class="button">
+        <label for="gmap_where">Where:</label>
+        <input id="gmap_where" type="text" name="gmap_where" /></div>
+    <div id="button2" class="button" onclick="findAddress(); return false;">Search for address</div>
+    <div class="button">
+        <label for="gmap_keyword">Keyword (optional):</label>
+        <input id="gmap_keyword" type="text" name="gmap_keyword" /></div>
+    <div class="button">
+        <label for="gmap_type">Type:</label>
+        <select id="gmap_type">
+             <option value="restaurant">Restaurants</option>
+          <option value="attractions">Attractions</option>
+          <option value="hotel">Hotels</option>
+          <option value="accomodation">B & B's</option>
+          <option value="bait" selected>Bait & Tackle Shops</option>
+        </select>
+    </div>
+    <div class="button">
+        <label for="gmap_radius">Radius:</label>
+        <select id="gmap_radius">
+            <option value="50000">50 kms</option>
+          <option value="30000">30 kms</option>
+          <option value="20000">20 kms</option>
+          <option value="10000" selected>10 kms</option>
+        </select>
+    </div>
+    <input type="hidden" id="lat" name="lat" value="40.7143528" />
+    <input type="hidden" id="lng" name="lng" value="-74.0059731" />
+    <div id="button1" class="button" onclick="findPlaces(); return false;">Search for objects</div>
+</div>
+
+         <!-- <label for="raddressInput" id="location">Search location:</label>
          <input type="text" id="addressInput" size="15"/>
          <br> </br> 
-        <!-- <ul>
+        <ul>
             <li><button class="btn" value="restaurant">Restaurants</button></li>
             <li><button class="btn" value="attractions">Attractions</button></li>
             <li><button class="btn" value="hotel">Hotels</button></li>
             <li><button class="btn" value="accomodation">B & B's</button></li>
             <li><button class="btn" value="bait">Bait Shops</button></li>
         </ul> -->
-        <label for="outlet">Search Nearby:</label>
-        <select id="outlet" label="Radius">
+        <!-- <label for="outlet">Search Nearby:</label>
+        <select id="outlet" label="Outlet">
           <option value="restaurant">Restaurants</option>
           <option value="attractions">Attractions</option>
           <option value="hotel">Hotels</option>
           <option value="accomodation">B & B's</option>
           <option value="bait" selected>Bait & Tackle Shops</option>
-        </select>
-            <br> </br>
+        </select> -->
+            <!-- <br> </br>
         <label for="radiusSelect">Radius:</label>
         <select id="radiusSelect" label="Radius">
           <option value="50000">50 kms</option>
           <option value="30000">30 kms</option>
           <option value="20000">20 kms</option>
           <option value="10000" selected>10 kms</option>
-        </select>
+        </select> -->
         <!-- <input type="button" id="searchButton" value="Search"/> -->
     </div>
     <div><select id="locationSelect" style="width: 10%; visibility: hidden"></select></div>
@@ -85,7 +117,7 @@
         </div>
     </div>
     <br> </br>
-<footer>
+<footer class="container-fluid">
     <ul class="nav justify-content-center">
         <li class="nav-item">
             <a class="nav-link active btn-purple" href="index.html"><i class="fa fa-home" aria-hidden="true"></i> Home</a>
@@ -121,9 +153,9 @@
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCSENlQwLM6btnfzoUUCsVci5D-mGi8rzI&libraries=places&callback=initMap" async defer></script>
     <!-- <script src="assets/js/maps1.js"></script> -->
     <!-- <script src="assets/js/places.js"></script> -->
-    <!-- <script src="assets/js/search.js"></script> -->
-    <!-- <script src="assets/js/maps2.js"></script> -->
+    <script src="assets/js/search.js"></script>
+    <script src="assets/js/maps2.js"></script>
     <!-- <script src="assets/js/api.js"></script> -->
-    <script src="assets/js/maps.js"></script>
+    <!-- <script src="assets/js/maps.js"></script> -->
 </body>
 </html>
