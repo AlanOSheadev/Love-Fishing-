@@ -81,26 +81,14 @@ function initMap() {
                 infoWindow.open(map, marker);
             }
         })(marker, i));
+
+    }
       
-
-    // const filterButtons = document.getElementsByClassName('btn');
-
-    // function handleClick(event) {
-    //     var type = event.target.getAttribute('data-type');
-    //     console.log(type);
-    //     service.nearbySearch;
-        
-    // }
-
-    // Array.from(filterButtons).forEach(button => {
-    //     button.addEventListener('click', handleClick);
-    // });
-
     // Create the places service.
     var service = new google.maps.places.PlacesService(map);
     var radius = document.getElementById('radiusSelect').value;
     var type = document.getElementById('outlet').value;
-    
+
     var request = {
         location: kerry,
         radius: radius,
@@ -118,10 +106,8 @@ function initMap() {
 
     // Perform a nearby search.
     service.nearbySearch(
-
         request,
-        // {location: kerry, radius: radius, keyword: type}, //  I thought that i could use the type defined by the buttons above to change the output ???
-        
+           
         function (results, status, pagination) {
             if (status !== 'OK') return;
 
@@ -130,8 +116,9 @@ function initMap() {
             getNextPage = pagination.hasNextPage && function () {
                 pagination.nextPage();
             };
+        
         });
-       
+
 function createMarkers(places) {
 
     var placesList = document.getElementById('places');
@@ -144,6 +131,8 @@ function createMarkers(places) {
             anchor: new google.maps.Point(17, 34),
             scaledSize: new google.maps.Size(25, 25)
         };
+
+        // places[i].setMap(null);
 
         var marker = new google.maps.Marker({
             map: map,
@@ -161,4 +150,3 @@ function createMarkers(places) {
         }
 
     }
-}
