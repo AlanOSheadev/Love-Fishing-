@@ -1,6 +1,9 @@
+var type;
+var radius = document.getElementById('radiusSelect').value;
+var kerry = { lat: 52.261062, lng: -9.683187 }; 
+
 function initMap() {
     var bounds = new google.maps.LatLngBounds();
-    var kerry = { lat: 52.261062, lng: -9.683187 };
     var map = new google.maps.Map(document.getElementById("map"), {
         zoom: 8.5,
         center: kerry
@@ -56,8 +59,6 @@ function initMap() {
         type: 'poly'
     };
 
-
-    
     // Add multiple markers to map
     var infoWindow = new google.maps.InfoWindow(), marker, i;
 
@@ -80,13 +81,14 @@ function initMap() {
                 infoWindow.open(map, marker);
             }
         })(marker, i));
-    }   
-   // } was here
+      
+
     const filterButtons = document.getElementsByClassName('btn');
 
     function handleClick(event) {
-        const type = event.target.getAttribute('data-type');
-        console.log(type);
+        var type = event.target.getAttribute('data-type');
+        service.nearbySearch;
+        // console.log(type);
     }
 
     Array.from(filterButtons).forEach(button => {
@@ -95,7 +97,7 @@ function initMap() {
 
     // Create the places service.
     var service = new google.maps.places.PlacesService(map);
-    var getNextPage = null;
+    // var getNextPage = null;
     var moreButton = document.getElementById('more');
     moreButton.onclick = function () {
         moreButton.disabled = true;
@@ -104,7 +106,7 @@ function initMap() {
 
     // Perform a nearby search.
     service.nearbySearch(
-        { location: kerry, radius: 15000, type: ['restaurant']}, //  I thought that i could use the type defined by the buttons above to change the output ???
+        { location: kerry, radius: radius, keyword: type}, //  I thought that i could use the type defined by the buttons above to change the output ???
         function (results, status, pagination) {
             if (status !== 'OK') return;
 
@@ -114,10 +116,10 @@ function initMap() {
                 pagination.nextPage();
             };
         });
-        console.log(service.nearbySearch);
-
+    }    
+    
 function createMarkers(places) {
-    var bounds = new google.maps.LatLngBounds();
+
     var placesList = document.getElementById('places');
 
     for (var i = 0, place; place = places[i]; i++) {
@@ -140,11 +142,8 @@ function createMarkers(places) {
         li.textContent = place.name;
         placesList.appendChild(li);
 
-        bounds.extend(place.geometry.location);
     }
-    map.fitBounds(bounds);
+    
 }
-
-google.maps.event.addDomListener(service, 'handleClick', initMap);
 
 }
