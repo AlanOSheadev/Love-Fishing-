@@ -8,7 +8,7 @@ var infos = Array();
 function initMap() {
 
     // prepare Geocoder
-    geocoder = new google.maps.Geocoder();
+    // geocoder = new google.maps.Geocoder();
 
     var map = new google.maps.Map(document.getElementById("map"), {
         zoom: 8.5,
@@ -47,73 +47,64 @@ function clearOverlays() {
 
 // clear infos function
 
-function clearInfos() {
-    if (infos) {
-        for (i in infos) {
-            if (infos[i].getMap()) {
-                infos[i].close();
-            }
-        }
-    }
+// function clearInfos() {
+//     if (infos) {
+//         for (i in infos) {
+//             if (infos[i].getMap()) {
+//                 infos[i].close();
+//             }
+//         }
+//     }
 
-}
+// }
 
 // find address function
 
-function findAddress() {
+// function findAddress() {
 
-    var address = document.getElementById("gmap_where").value;
+//     var address = document.getElementById("gmap_where").value;
    
-    // script uses our 'geocoder' in order to find location by address name
+//     // script uses our 'geocoder' in order to find location by address name
     
-    geocoder.geocode( { 'address': address}, function(results, status) {
-        if (status == google.maps.GeocoderStatus.OK) { // and, if everything is ok
+//     geocoder.geocode( { 'address': address}, function(results, status) {
+//         if (status == google.maps.GeocoderStatus.OK) { // and, if everything is ok
 
-            // we will center map
-            var addrLocation = results[0].geometry.location;
+//             // we will center map
+//             var addrLocation = results[0].geometry.location;
 
-            map.setCenter(addrLocation);
-            // store current coordinates into hidden variables
-            document.getElementById('lat').value = results[0].geometry.location.lat();
-            document.getElementById('lng').value = results[0].geometry.location.lng();
-            // and then - add new custom marker
-            var addrMarker = new google.maps.Marker({
-                position: addrLocation,
-                map: map,
-                title: results[0].formatted_address,
-                icon: 'marker.png'
-            });
-        } else {
-            alert('Geocode was not successful for the following reason: ' + status);
-        }
+//             map.setCenter(addrLocation);
+//             // store current coordinates into hidden variables
+//             document.getElementById('lat').value = results[0].geometry.location.lat();
+//             document.getElementById('lng').value = results[0].geometry.location.lng();
+//             // and then - add new custom marker
+//             var addrMarker = new google.maps.Marker({
+//                 position: addrLocation,
+//                 map: map,
+//                 title: results[0].formatted_address,
+//                 icon: 'marker.png'
+//             });
+//         } else {
+//             alert('Geocode was not successful for the following reason: ' + status);
+//         }
 
-    });
-}
+//     });
+// }
 // find custom places function
 function findPlaces() {
     // prepare variables (filter)
-    var type = document.getElementById('gmap_type').value;
-    var radius = document.getElementById('gmap_radius').value;
-    var keyword = document.getElementById('gmap_keyword').value;
-    var lat = document.getElementById('lat').value;
-    var lng = document.getElementById('lng').value;
-    var cur_location = new google.maps.LatLng(lat, lng);
+    
 
     // prepare request to Places
 
     var request = {
 
-        location: cur_location,
-        radius: radius,
-        types: [type]
+        location: kerry,
+        radius: 50000,
+        keyword: ['bait']
 
     };
 
-    if (keyword) {
-
-        request.keyword = [keyword];
-
-    }
+    console.log(request);
 
     // send request
     service = new google.maps.places.PlacesService(map);
@@ -170,4 +161,4 @@ function createMarker(obj) {
     infos.push(infowindow);
 }
 // initialization
-google.maps.event.addDomListener(window, 'load', initMap);
+// google.maps.event.addDomListener(window, 'load', initMap);

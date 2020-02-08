@@ -2,15 +2,15 @@
 var map;
 var type;
 var radius;
-var markers =[];
+var kerry = { lat: 52.261062, lng: -9.683187 };
 
  function initMap() {
     var bounds = new google.maps.LatLngBounds();
-    var kerry = { lat: 52.261062, lng: -9.683187 };
     var map = new google.maps.Map(document.getElementById("map"), {
         zoom: 8.5,
         center: kerry
     });
+
 
     // Multiple markers location, latitude, and longitude
     var marks = [
@@ -64,14 +64,14 @@ var markers =[];
 
 
     // Add multiple markers to map
-    var infoWindow = new google.maps.InfoWindow(), marker, i;
+    var infoWindow = new google.maps.InfoWindow(), infos, i;
 
     // Place each marker on the map  
     for (i = 0; i < marks.length; i++) {
         var position = new google.maps.LatLng(marks[i][1], marks[i][2]);
         bounds.extend(position);
         infos = new google.maps.Marker({
-            position: position,
+            position: kerry,
             map: map,
             icon: image,
             shape: shape,
@@ -85,7 +85,9 @@ var markers =[];
                 infoWindow.open(map, infos);
             }
         })(infos, i));
-    }  
+    } 
+
+
     
     // function clearOverlays() {
     // if (markers) {
@@ -96,66 +98,71 @@ var markers =[];
     //     }
     // }
 
-    const filterButtons = document.getElementsByClassName('btn');
+    // const filterButtons = document.getElementsByClassName('btn');
  
-    function handleClick(event) {
-        var type = event.target.getAttribute('data-type');
-        findPlaces();
-        console.log(type);
-    }
+    // function handleClick(event) {
+    //     var type = event.target.getAttribute('data-type');
+    //     getData();
+    //     console.log(type);
+    // }
  
-    Array.from(filterButtons).forEach(button => {
-        button.addEventListener('click', handleClick);
-    });
+    // Array.from(filterButtons).forEach(button => {
+    //     button.addEventListener('click', handleClick);
+    // });
 
-    function findAddress() {
-    var address = document.getElementById("location").value;
-    // script uses our 'geocoder' in order to find location by address name
-    geocoder.geocode( { 'address': address}, function(results, status) {
-        if (status == google.maps.GeocoderStatus.OK) { // and, if everything is ok
-            // we will center map
-            var addrLocation = results[0].geometry.location;
-            map.setCenter(addrLocation);
-            // store current coordinates into hidden variables
-            document.getElementById('lat').value = results[0].geometry.location.lat();
-            document.getElementById('lng').value = results[0].geometry.location.lng();
-            // and then - add new custom marker
-            var addrMarker = new google.maps.Marker({
-                position: addrLocation,
-                map: map,
-                title: results[0].formatted_address,
-                icon: 'marker.png'
-            });
-        } else {
-            alert('Geocode was not successful for the following reason: ' + status);
-        }
-    });
+    // function findAddress() {
+    // var address = document.getElementById("location").value;
+    // // script uses our 'geocoder' in order to find location by address name
+    // geocoder.geocode( { 'address': address}, function(results, status) {
+    //     if (status == google.maps.GeocoderStatus.OK) { // and, if everything is ok
+    //         // we will center map
+    //         var addrLocation = results[0].geometry.location;
+    //         map.setCenter(addrLocation);
+    //         // store current coordinates into hidden variables
+    //         document.getElementById('lat').value = results[0].geometry.location.lat();
+    //         document.getElementById('lng').value = results[0].geometry.location.lng();
+    //         // and then - add new custom marker
+    //         var addrMarker = new google.maps.Marker({
+    //             position: addrLocation,
+    //             map: map,
+    //             title: results[0].formatted_address,
+    //             icon: 'marker.png'
+    //         });
+    //     } else {
+    //         alert('Geocode was not successful for the following reason: ' + status);
+    //     }
+    // });
+    // }
 
-}
-
-
-    function findPlaces (){
-        var type = event.target.getAttribute('data-type');
+ // Create the places service.
+        var service = new google.maps.places.PlacesService(map);
         var radius = document.getElementById('radiusSelect').value;
-         var address = document.getElementById("location").value;
-
-        var request = {
-            location: kerry,
-            radius: radius,
-            keyword: type
+        var type = document.getElementById('outlet').value;
+        var getNextPage = null;
+        var moreButton = document.getElementById('more');
+        moreButton.onclick = function() {
+          moreButton.disabled = true;
+          if (getNextPage) getNextPage();
         };
 
-        console.log(request);
-        
-        service = new google.maps.places.PlacesService(map);
-        service.search(request, createMarkers);
-    }
-
-    
+        // Perform a nearby search.
+       
+        service.nearbySearch(
+            {location: kerry, radius: radius, type: type},
+            function(results, status, pagination) {
+              if (status !== 'OK') return;
+                
+              createMarkers(results);
+              moreButton.disabled = !pagination.hasNextPage;
+              getNextPage = pagination.hasNextPage && function() {
+                pagination.nextPage();
+              };
+            });
+}
 
     function createMarkers(places) {
      if (status == google.maps.places.PlacesServiceStatus.OK) {
-    var bounds = new google.maps.LatLngBounds();
+    // var bounds = new google.maps.LatLngBounds();
     var placesList = document.getElementById('places');
 
     for (var i = 0, place; place = places[i]; i++) {
@@ -196,7 +203,7 @@ var markers =[];
 
 // google.maps.event.addDomListener(window, 'load', initMap);
 
- }
+ 
 
 
 

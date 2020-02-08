@@ -1,10 +1,12 @@
 // ---- Taken from Codex turotials on multiple markers info windows ----
 var type;
+var map;
 var ma =[];
+var radius;
+var kerry = { lat: 52.261062, lng: -9.683187 };
 
  function initMap() {
     var bounds = new google.maps.LatLngBounds();
-    var kerry = { lat: 52.261062, lng: -9.683187 };
     var map = new google.maps.Map(document.getElementById("map"), {
         zoom: 8.5,
         center: kerry
@@ -55,6 +57,8 @@ var ma =[];
             '<p>Bait: Lug, mackerel and sandeel</p>' + '</div>']
     ];
 
+    // I'm adding custom markers to my map for local fishing spots using Rodfendr
+
     var image = {
         url: "https://i.ibb.co/NVrPjGJ/sm.png",
         size: new google.maps.Size(50, 75),
@@ -92,14 +96,15 @@ var ma =[];
         })(marker, i));
     }   
    // } was here
-
+ 
 // ---- Developed with mentor  ----
 
     const filterButtons = document.getElementsByClassName('btn');
 
     function handleClick(event) {
         type = event.target.getAttribute('data-type');
-        getNearbyPlaces(kerry);
+        getNearbyPlaces();
+        console.log(type);
     }
 
     Array.from(filterButtons).forEach(button => {
@@ -110,31 +115,35 @@ var ma =[];
 
     // Create the places service.
     var service = new google.maps.places.PlacesService(map);
-    var getNextPage = null;
+    var radius = document.getElementById('radiusSelect').value;
+    // var type = document.getElementById('outlet').value;
     
-
-    function getNearbyPlaces(kerry) {
+    function getNearbyPlaces(type) {
     let request = {
     location: kerry,
-    radius: 50000,
+    radius: radius,
     keyword: type
     };
-
+    
+    console.log(request);
 
 
     service = new google.maps.places.PlacesService(map);
-    service.nearbySearch(request, nearbyCallback);
-}
-
-// Handle the results (up to 20) of the Nearby Search
-function nearbyCallback(results, status) {
-    createMarkers(results);
+    service.getNearbyPlaces(request, nearbyCallback);
     }
 }
+// Handle the results (up to 20) of the Nearby Search
+function nearbyCallback(request, status) {
+
+    if (status !== 'OK') return;
+
+    createMarkers(request);
+    }
+
 
 // Call Places Nearby Search on user's location
 
-getNearbyPlaces(kerry);
+// getNearbyPlaces(kerry);
 
 
 function createMarkers(places) {
@@ -155,7 +164,6 @@ function createMarkers(places) {
 
         
         var typemarker = new google.maps.Marker({
-            
             map: map,
             icon: image,
             title: place.name,
