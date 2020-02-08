@@ -1,21 +1,33 @@
 var geocoder;
 var map;
+var kerry = { lat: 52.261062, lng: -9.683187 };
 var markers = Array();
 var infos = Array();
 
-function initialize() {
+
+function initMap() {
+
     // prepare Geocoder
     geocoder = new google.maps.Geocoder();
 
-    // set initial position (New York)
-    var myLatlng = new google.maps.LatLng(40.7143528,-74.0059731);
-    var myOptions = { // default map options
-        zoom: 14,
-        center: myLatlng,
-        mapTypeId: google.maps.MapTypeId.ROADMAP
-    };
+    var map = new google.maps.Map(document.getElementById("map"), {
+        zoom: 8.5,
+        center: kerry
+    });
 
-    map = new google.maps.Map(document.getElementById('gmap_canvas'), myOptions);
+// function initialize() {
+//     // prepare Geocoder
+//     geocoder = new google.maps.Geocoder();
+
+//     // set initial position (Kerry)
+//     var myLatlng = new google.maps.LatLng(52.261062, -9.683187);
+//     var myOptions = { // default map options
+//         zoom: 8.5,
+//         center: myLatlng,
+//         mapTypeId: google.maps.MapTypeId.ROADMAP
+//     };
+
+    // map = new google.maps.Map(document.getElementById('map'), myOptions);
 }
 
 // clear overlays function
@@ -158,4 +170,4 @@ function createMarker(obj) {
     infos.push(infowindow);
 }
 // initialization
-google.maps.event.addDomListener(window, 'load', initialize);
+google.maps.event.addDomListener(window, 'load', initMap);
