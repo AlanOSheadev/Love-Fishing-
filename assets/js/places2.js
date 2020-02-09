@@ -1,6 +1,9 @@
 var type;
 var radius;
-var kerry = { lat: 52.261062, lng: -9.683187 }; 
+var kerry = {
+    lat: 52.261062,
+    lng: -9.683187
+};
 
 function initMap() {
     var bounds = new google.maps.LatLngBounds();
@@ -8,6 +11,8 @@ function initMap() {
         zoom: 8.5,
         center: kerry
     });
+
+    //Taken from Codex tutorial on multiple markers
 
     // Multiple markers location, latitude, and longitude
     var marks = [
@@ -24,32 +29,37 @@ function initMap() {
             '<h3>Kells Bay</h3>' +
             '<p>Beach, Pier and Rock fishing.</p>' +
             '<p>The beach and pier are easily accessible but be careful on the rocks.</p>' +
-            '<p>Bait: Lug, mackerel,lures and sandeel.</p>' + '</div>'],
+            '<p>Bait: Lug, mackerel,lures and sandeel.</p>' + '</div>'
+        ],
         ['<div class="info_content">' +
             '<h3>Valentia Island</h3>' +
             '<p>Beach, Pier and Rock fishing.</p>' +
             '<p>The beach and pier are easily accessible but be careful on the rocks.</p>' +
-            '<p>Bait: Lug, mackerel, sandeel and lures.</p>' + '</div>'],
+            '<p>Bait: Lug, mackerel, sandeel and lures.</p>' + '</div>'
+        ],
         ['<div class="info_content">' +
             '<h3>Inch Beach</h3>' +
             '<p>Beach fishing at its finest one of Irelands premier beach marks.</p>' +
             '<p>The beach is easily accessible but be careful on the rocks, people often drive onto the beach but be mindful of the tide as is comes in quickly and has caught out some in the past.</p>' +
-            '<p>Bait: Lug, mackerel and sandeel</p>' + '</div>'],
+            '<p>Bait: Lug, mackerel and sandeel</p>' + '</div>'
+        ],
         ['<div class="info_content">' +
             '<h3>Fenit Pier</h3>' +
             '<p>Pier and Rock fishing.</p>' +
             '<p>The pier is easily accessible, one can simply drive down and park on the pier, but be careful on the rocks. This is my personal favourite ;)</p>' +
-            '<p>Bait: Lug, mackerel/bluey, sandeel and feathers/lures</p>' + '</div>'],
+            '<p>Bait: Lug, mackerel/bluey, sandeel and feathers/lures</p>' + '</div>'
+        ],
         ['<div class="info_content">' +
             '<h3>Tarbert on The Shannon Estuary</h3>' +
             '<p>Beach, Pier and Rock fishing.</p>' +
             '<p>The beach and pier are easily accessible but be careful on the rocks</p>' +
-            '<p>Bait: Lug, mackerel and sandeel</p>' + '</div>']
+            '<p>Bait: Lug, mackerel and sandeel</p>' + '</div>'
+        ]
     ];
 
     var image = {
         url: "https://i.ibb.co/NVrPjGJ/sm.png",
-        size: new google.maps.Size(50, 75),
+        size: new google.maps.Size(70, 95),
         origin: new google.maps.Point(0, 0),
         anchor: new google.maps.Point(0, 32)
     };
@@ -60,7 +70,8 @@ function initMap() {
     };
 
     // Add multiple markers to map
-    var infoWindow = new google.maps.InfoWindow(), marker, i;
+    var infoWindow = new google.maps.InfoWindow(),
+        marker, i;
 
     // Place each marker on the map  
     for (i = 0; i < marks.length; i++) {
@@ -75,15 +86,17 @@ function initMap() {
         });
 
         // Add info window to marker    
-        google.maps.event.addListener(marker, 'click', (function (marker, i) {
-            return function () {
+        google.maps.event.addListener(marker, 'click', (function(marker, i) {
+            return function() {
                 infoWindow.setContent(infoWindowContent[i][0]);
                 infoWindow.open(map, marker);
             }
         })(marker, i));
 
     }
-      
+
+    // I used several tutorials from Google API documents for the next piece
+
     // Create the places service.
     var service = new google.maps.places.PlacesService(map);
     var radius = document.getElementById('radiusSelect').value;
@@ -99,54 +112,53 @@ function initMap() {
 
     // var getNextPage = null;
     var moreButton = document.getElementById('more');
-    moreButton.onclick = function () {
+    moreButton.onclick = function() {
         moreButton.disabled = true;
         if (getNextPage) getNextPage();
     };
 
     // Perform a nearby search.
     service.nearbySearch(
+
         request,
-           
-        function (results, status, pagination) {
+
+        function(results, status, pagination) {
             if (status !== 'OK') return;
 
             createMarkers(results);
             moreButton.disabled = !pagination.hasNextPage;
-            getNextPage = pagination.hasNextPage && function () {
+            getNextPage = pagination.hasNextPage && function() {
                 pagination.nextPage();
             };
-        
+
         });
 
-function createMarkers(places) {
+    function createMarkers(places) {
 
-    var placesList = document.getElementById('places');
+        var placesList = document.getElementById('places');
 
-    for (var i = 0, place; place = places[i]; i++) {
-        var image = {
-            url: place.icon,
-            size: new google.maps.Size(71, 71),
-            origin: new google.maps.Point(0, 0),
-            anchor: new google.maps.Point(17, 34),
-            scaledSize: new google.maps.Size(25, 25)
-        };
+        for (var i = 0, place; place = places[i]; i++) {
+            var image = {
+                url: place.icon,
+                size: new google.maps.Size(71, 71),
+                origin: new google.maps.Point(0, 0),
+                anchor: new google.maps.Point(17, 34),
+                scaledSize: new google.maps.Size(25, 25)
+            };
 
-        // places[i].setMap(null);
+            var marker = new google.maps.Marker({
+                map: map,
+                icon: image,
+                title: place.name,
+                position: place.geometry.location
+            });
 
-        var marker = new google.maps.Marker({
-            map: map,
-            icon: image,
-            title: place.name,
-            position: place.geometry.location
-        });
+            var li = document.createElement('li');
+            li.textContent = place.name;
+            placesList.appendChild(li);
 
-        var li = document.createElement('li');
-        li.textContent = place.name;
-        placesList.appendChild(li);
-
-            }
-    
         }
-        google.maps.event.addDomListener(request, 'click', service.nearbySearch);
+
     }
+
+}
