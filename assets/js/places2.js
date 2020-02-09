@@ -148,5 +148,5 @@ function createMarkers(places) {
             }
     
         }
-
+        google.maps.event.addDomListener(request, 'click', service.nearbySearch);
     }
