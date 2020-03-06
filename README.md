@@ -12,9 +12,9 @@ The site is designed to promote Rodfendr the lightest fishing rod rest in the wo
 ### Structure
 I immediately want the visitor to see the benefits of using Rodfendr, they can see me relaxing and using Rodfendr to protect my fishing rod. I want them to understand that Rodfendr is easy to bring on vacation.  The map shows some of Kerry's fine fishing marks the info window gives the angler a quick outline of the type of area it is and what type of bait to use etc.  The search menus provide information on local services which they might need.
 ### Skeleton
-1. [Landing Page wireframe](https://www.canva.com/design/DADzUVMHqw4/CU4Q3GQOzu9TNThslrJbZg/view?utm_content=DADzUVMHqw4&utm_campaign=designshare&utm_medium=link&utm_source=homepage_design_menu)
-2. [Contact wireframe](https://www.canva.com/design/DADwgJjSAHc/SIu2INajjyGezQ6Ib_P1TA/view?utm_content=DADwgJjSAHc&utm_campaign=designshare&utm_medium=link&utm_source=sharebutton)
-3. [Privacy wireframe](https://www.canva.com/design/DADwgDVISec/Z3D0Wg87DtTWbIuNqRPuiA/view?utm_content=DADwgDVISec&utm_campaign=designshare&utm_medium=link&utm_source=sharebutton)
+1. ![Landing Page wireframe](https://www.canva.com/design/DADzUVMHqw4/CU4Q3GQOzu9TNThslrJbZg/view?utm_content=DADzUVMHqw4&utm_campaign=designshare&utm_medium=link&utm_source=homepage_design_menu)
+2. ![Contact wireframe](https://www.canva.com/design/DADwgJjSAHc/SIu2INajjyGezQ6Ib_P1TA/view?utm_content=DADwgJjSAHc&utm_campaign=designshare&utm_medium=link&utm_source=sharebutton)
+3. ![Privacy wireframe](https://www.canva.com/design/DADwgDVISec/Z3D0Wg87DtTWbIuNqRPuiA/view?utm_content=DADwgDVISec&utm_campaign=designshare&utm_medium=link&utm_source=sharebutton)
 ### Surface
 The colors were chosen to contrast easily and make it easy to locate the links especially the “Buy now” link which has an extra orange icon.  The background colors and font colors were chosen to make it easy on the visitors eyes and I used photos and videos instead of a lot of sentences so as not to overload the visitor
 ### Technologies
