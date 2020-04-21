@@ -1,9 +1,11 @@
-var type;
-var radius;
 var kerry = {
     lat: 52.261062,
     lng: -9.683187
 };
+var geocoder;
+var map;
+var markers = Array();
+var infos = Array();
 
 function initMap() {
     var bounds = new google.maps.LatLngBounds();
@@ -94,4 +96,88 @@ function initMap() {
         })(marker, i));
 
     }
+
+// The next half I found on Script turorials and I adapted it to this map to search for
+// nearby services
+
+// clear overlays function
+function clearOverlays() {
+    if (markers) {
+        for (i in markers) {
+            markers[i].setMap(null);
+        }
+        markers = [];
+        infos = [];
+    }
 }
+// clear infos function
+function clearInfos() {
+    if (infos) {
+        for (i in infos) {
+            if (infos[i].getMap()) {
+                infos[i].close();
+            }
+        }
+    }
+}
+
+// find custom places function
+document.getElementById ("findPlaces").addEventListener ("click", myFunction, false);
+
+function myFunction() {
+    // prepare variables (filter)
+    var radius = document.getElementById('gmap_radius').value;
+    var keyword = document.getElementById('gmap_keyword').value;
+    var lat = document.getElementById('lat').value;
+    var lng = document.getElementById('lng').value;
+    var cur_location = new google.maps.LatLng(lat, lng);
+    // prepare request to Places
+    var request = {
+        location: cur_location,
+        radius: radius,
+    };
+    if (keyword) {
+        request.keyword = [keyword];
+    }
+    // send request
+    service = new google.maps.places.PlacesService(map);
+    service.search(request, createMarkers);
+}
+// create markers (from 'findPlaces' function)
+function createMarkers(results, status) {
+    if (status == google.maps.places.PlacesServiceStatus.OK) {
+        // if we have found something - clear map (overlays)
+        clearOverlays();
+        // and create new markers by search result
+        for (var i = 0; i < results.length; i++) {
+            createMarker(results[i]);
+        }
+    } else if (status == google.maps.places.PlacesServiceStatus.ZERO_RESULTS) {
+        alert('Sorry, nothing is found');
+    }
+}
+// creare single marker function
+function createMarker(obj) {
+    // prepare new Marker object
+    var mark = new google.maps.Marker({
+        position: obj.geometry.location,
+        map: map,
+        title: obj.name
+    });
+    markers.push(mark);
+    // prepare info window
+    var infowindow = new google.maps.InfoWindow({
+        content: '<img src="' + obj.icon + '" /><font style="color:#000;">' + obj.name +
+            '<br />Rating: ' + obj.rating + '<br />Vicinity: ' + obj.vicinity + '</font>'
+    });
+    // add event handler to current marker
+    google.maps.event.addListener(mark, 'click', function() {
+        clearInfos();
+        infowindow.open(map, mark);
+    });
+    infos.push(infowindow);
+}
+}
+
+// initialization
+google.maps.event.addDomListener(window, 'load', initialize);
